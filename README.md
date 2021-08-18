@@ -31,7 +31,7 @@ COM5 - /dev/ttyS4
 And setup the COM port for LOAD and RUN in core_portme.mak
 Please also install pyserial under Cygwin pip3 install pyserial
 
-** To load/run in Command Prompt **
+**To load/run in Command Prompt**
 
 cd build
 
@@ -40,7 +40,7 @@ cd scripts
 python GRV3000D_Config.py --port=COM5 -r -R --console_enable -i ../GRV3000D.elf
 
 
-** To load/run in Cygwin **
+**To load/run in Cygwin**
 
 cd build
 
