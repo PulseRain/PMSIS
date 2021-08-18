@@ -19,9 +19,13 @@ After connecting the board to a Windows PC, please make sure the COM port for th
 Under Cygwin, the COM port mapping is like:
 
 COM1 - /dev/ttyS0
+
 COM2 - /dev/ttyS1
+
 COM3 - /dev/ttyS2
+
 COM4 - /dev/ttyS3
+
 COM5 - /dev/ttyS4
 
 And setup the COM port for LOAD and RUN in core_portme.mak
