@@ -1,16 +1,16 @@
 # PMSIS
 PulseRain Microcontroller Software Interface Standard
 
-# Clean
+## Clean
 
 cd build
 make clean
 
-# Build
+## Build
 cd build
 make
 
-# Load and Run
+## Load and Run
 
 Run for GRV3000D on ArtyA7-100T board
 
