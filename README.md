@@ -39,6 +39,7 @@ cd scripts
 
 python GRV3000D_Config.py --port=COM5 -r -R --console_enable -i ../GRV3000D.elf
 
+
 To load/run in Cygwin
 
 cd build
