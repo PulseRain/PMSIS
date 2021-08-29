@@ -60,7 +60,6 @@ void main()
     delay(2000);
     printf ("==================> DSP HINT TEST\n\n");
   
-  
     test_exp(); printf ("\n");
     test_abs(); printf ("\n");
     test_negate(); printf ("\n");
@@ -90,12 +89,12 @@ void main()
     test_FFT_BF_I(1024, 4, 0);  printf ("\n");
     
     
-    test_FFT_BF_II(2,  2048);  printf ("\n");
-    test_FFT_BF_II(8,  512);   printf ("\n");
-    test_FFT_BF_II(32, 128);   printf ("\n");
-    test_FFT_BF_II(128,  32);  printf ("\n");
-    test_FFT_BF_II(512,  8);   printf ("\n");
-    test_FFT_BF_II(2048,  2);  printf ("\n");
+    test_FFT_BF_Basic(2,  2048);  printf ("\n");
+    test_FFT_BF_Basic(8,  512);   printf ("\n");
+    test_FFT_BF_Basic(32, 128);   printf ("\n");
+    test_FFT_BF_Basic(128,  32);  printf ("\n");
+    test_FFT_BF_Basic(512,  8);   printf ("\n");
+    test_FFT_BF_Basic(2048,  2);  printf ("\n");
  
     test_FFT_TWIDDLE(1, 4096);
     test_FFT_TWIDDLE(4, 1024);

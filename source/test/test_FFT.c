@@ -7266,7 +7266,7 @@ void test_FFT_BF_I(uint32_t num_of_sections, uint32_t section_size, uint32_t iff
 }
 
 
-void test_FFT_BF_II(uint32_t num_of_sections, uint32_t section_size)
+void test_FFT_BF_Basic(uint32_t num_of_sections, uint32_t section_size)
 {
     uint32_t i, before = 0, after = 0, latency_soft, latency_hard;
     bool mismatch = false;
@@ -7278,7 +7278,7 @@ void test_FFT_BF_II(uint32_t num_of_sections, uint32_t section_size)
    
     disable_dsp_arty();
     before = rdmcycle();
-    pulserain_FFT_BF_II (fft_sample_buffer_soft, num_of_sections, section_size);
+    pulserain_FFT_BF_Basic (fft_sample_buffer_soft, num_of_sections, section_size);
     after  = rdmcycle();
     
     latency_soft = after - before;
@@ -7287,7 +7287,7 @@ void test_FFT_BF_II(uint32_t num_of_sections, uint32_t section_size)
          
     enable_dsp_arty();
     before = rdmcycle();
-    pulserain_FFT_BF_II (fft_sample_buffer_hard, num_of_sections, section_size);
+    pulserain_FFT_BF_Basic (fft_sample_buffer_hard, num_of_sections, section_size);
     after  = rdmcycle();
     
     latency_hard = after - before;
@@ -7362,8 +7362,8 @@ void test_FFT()
 {
     uint32_t i, before = 0, after = 0, latency_soft, latency_hard, fft_shift = 12;
     bool mismatch = false;
-    
-    pulserain_twiddle_gen(fft_twiddle, FFT_LOG2N, 4096, 1);
+        
+    pulserain_twiddle_gen(fft_twiddle, FFT_LOG2N, 1 << fft_shift, 1);
            
     for (i = 0; i < FFT_N * 2; ++i) {
         fft_sample_buffer_hard[i] = fft_sample_buffer_soft[i];
@@ -7398,6 +7398,8 @@ void test_FFT()
             mismatch = true;
         }
     }
+    
+    printf ("\n=============> FFT length is %d\n", FFT_N);
     
     test_assert (!mismatch, "FFT result matches!", "FFT result mismatches!");
     test_improvement (latency_soft, latency_hard); 

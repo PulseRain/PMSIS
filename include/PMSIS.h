@@ -194,7 +194,7 @@ extern void pulserain_FFT(q31_t *pBuffer, uint32_t log2N,  q31_t *pTwiddleTable,
 extern uint32_t pulserain_bit_reverse(uint32_t x, uint32_t log2N);
 
 extern void pulserain_FFT_BF_I (q31_t *pBuffer, uint32_t num_of_sections, uint32_t section_size, uint32_t ifft);
-extern void pulserain_FFT_BF_II (q31_t *pBuffer, uint32_t num_of_sections, uint32_t section_size);
+extern void pulserain_FFT_BF_Basic (q31_t *pBuffer, uint32_t num_of_sections, uint32_t section_size);
 extern void pulserain_BFII_twiddle (q31_t *pBuffer, uint32_t num_of_sections, uint32_t section_size, uint32_t scaleShift, q31_t* pTwiddleTable);
 
 #endif

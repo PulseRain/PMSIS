@@ -37,7 +37,7 @@
 //      FFT
 //=============================================================================
 
-void _pulserain_FFT_BFII_exchange(q31_t *pBuffer, uint32_t section_size)
+void _pulserain_FFT_basic_butterfly(q31_t *pBuffer, uint32_t section_size)
 {
     uint32_t i, j;
     q31_t sum_real, delta_real, sum_imag, delta_imag;
@@ -240,14 +240,14 @@ void __attribute__((optimize("O2"))) _pulserain_FFT_BF_I (q31_t *pBuffer, uint32
     }
 }
 
-void __attribute__((optimize("O2"))) _pulserain_FFT_BF_II (q31_t *pBuffer, uint32_t num_of_sections, uint32_t section_size)
+void __attribute__((optimize("O2"))) _pulserain_FFT_BF_Basic (q31_t *pBuffer, uint32_t num_of_sections, uint32_t section_size)
 {
     uint32_t j;
     q31_t *p;
     
     p = pBuffer;
     for (j = 0; j < num_of_sections; ++j) {
-        _pulserain_FFT_BFII_exchange (p, section_size); 
+        _pulserain_FFT_basic_butterfly (p, section_size); 
         p += section_size * 2;
     }
 }
@@ -257,9 +257,9 @@ void pulserain_FFT_BF_I (q31_t *pBuffer, uint32_t num_of_sections, uint32_t sect
     _pulserain_FFT_BF_I (pBuffer, num_of_sections, section_size, ifft); DSP_HINT_FFT_BF_32BIT(1);
 }
 
-void pulserain_FFT_BF_II (q31_t *pBuffer, uint32_t num_of_sections, uint32_t section_size)
+void pulserain_FFT_BF_Basic (q31_t *pBuffer, uint32_t num_of_sections, uint32_t section_size)
 {
-    _pulserain_FFT_BF_II (pBuffer, num_of_sections, section_size); DSP_HINT_FFT_BF_32BIT(2);
+    _pulserain_FFT_BF_Basic (pBuffer, num_of_sections, section_size); DSP_HINT_FFT_BF_32BIT(2);
 }
 
 void __attribute__((optimize("O2"))) _pulserain_BFII_twiddle (q31_t *pBuffer, uint32_t num_of_sections, uint32_t section_size, q31_t* pTwiddleTable, uint32_t scaleShift)
@@ -296,7 +296,7 @@ void __attribute__((optimize("O2"))) _pulserain_FFT(q31_t *pBuffer, uint32_t log
                   
         p = pBuffer;
         section_size >>= 1;
-        pulserain_FFT_BF_II(pBuffer, (uint32_t)(1 << (2 * i + 1)), section_size);
+        pulserain_FFT_BF_Basic(pBuffer, (uint32_t)(1 << (2 * i + 1)), section_size);
         
         
         pulserain_BFII_twiddle(pBuffer, (uint32_t)(1 << (2 * i)), section_size * 2, scaleShift, pTwiddleTable);
@@ -309,8 +309,8 @@ void pulserain_FFT(q31_t *pBuffer, uint32_t log2N,  q31_t *pTwiddleTable, uint32
     uint32_t N = 1 << log2N;
     
     if (ifft) {
-        _pulserain_FFT(pBuffer, log2N, N, pTwiddleTable, scaleShift, 1); //DSP_HINT_IFFT_32BIT;
+        _pulserain_FFT(pBuffer, log2N, N, pTwiddleTable, scaleShift, 1); 
     } else {
-        _pulserain_FFT(pBuffer, log2N, N, pTwiddleTable, scaleShift, 0); //DSP_HINT_FFT_32BIT;
+        _pulserain_FFT(pBuffer, log2N, N, pTwiddleTable, scaleShift, 0); 
     }
 }

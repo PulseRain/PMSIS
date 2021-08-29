@@ -46,7 +46,7 @@ extern void test_dot_product_real();
 extern void test_dot_product_complex();
 
 extern void test_FFT_BF_I(uint32_t num_of_sections, uint32_t section_size, uint32_t ifft);
-extern void test_FFT_BF_II(uint32_t num_of_sections, uint32_t section_size);
+extern void test_FFT_BF_Basic(uint32_t num_of_sections, uint32_t section_size);
 extern void test_FFT_TWIDDLE(uint32_t num_of_sections, uint32_t section_size);
 
 #endif
